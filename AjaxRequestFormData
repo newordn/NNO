@@ -1,0 +1,25 @@
+// sending form data with ajax
+// submit a form data with a file usign ajax jquery
+let requestFormDataAjax = (form,url) =>
+{ 
+        var fd = new FormData(form);
+        $.ajax(
+            {
+                type: 'POST',
+                crossOrigin:true,
+                url: url,
+                data: fd,
+                cache: false,
+                processData: false,
+                contentType: false
+            }
+        ).done(
+            (response)=>{
+                console.log(response);
+            }
+        ).fail(
+            (error)=>{
+                console.log(error);
+            }
+        )
+    }
