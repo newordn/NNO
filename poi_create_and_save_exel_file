@@ -1,0 +1,72 @@
+
+      // a function which performs creation
+    public String create(HSSFWorkbook workbook, List<String> headers, List<List<String>> datas) throws FileNotFoundException, DocumentException, IOException
+    {
+        FileOutputStream fileOutputStream=null;
+        String filename=null;
+        try
+        {
+            // Obtain a workbook from the excel file
+            HSSFSheet sheet=workbook.createSheet("Utilisateurs, Matières et Moyennes par matière");
+            sheet.setDefaultColumnWidth(30);
+            // create style for header cells
+            CellStyle style = workbook.createCellStyle();
+            Font font = workbook.createFont();
+            font.setFontName("Arial");
+            font.setBold(true);
+            style.setFont(font);
+            // create header row
+
+            HSSFRow header = sheet.createRow(0);
+            for(int i=0;i< headers.size();i++)
+            {
+                header.createCell(i).setCellValue(headers.get(i));
+                header.getCell(i).setCellStyle(style);
+            }
+            header.setHeight((short)-1);
+
+            // create data rows
+            int rowCount = 1;
+
+            for (List<String> data : datas) {
+                HSSFRow aRow = sheet.createRow(rowCount++);
+                for(int i=0;i< headers.size();i++)
+                {
+                    aRow.createCell(i).setCellValue(data.get(i));
+                }
+            }
+            filename = "Utilisateurs Matières et Moyennes" + ".xls";
+            fileOutputStream = new FileOutputStream(filename);
+            workbook.write(fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return filename;
+    }
+
+
+    // for the creation of excel docs, don't mind the name
+    @GetMapping(value = "/excel/courses_average",produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @ResponseBody
+    public FileSystemResource createPdf(HSSFWorkbook workbook, HttpServletResponse response) throws DocumentException, IOException  {
+        response.setContentType("application/xls");
+        response.setHeader("Content-Disposition", "attachment; filename="+ "Utilisateurs Matières et Moyennes" + ".xls");
+        List<String> headers = new ArrayList<String>();
+        headers.add("RECRUES/SLDTS");
+        headers.add("CMBT");
+        headers.add("MOYENNE");
+
+        List<List<String>> datas = new ArrayList<>() ;
+        List<String> tmp = new ArrayList<>();
+        tmp.add("SIKA ");
+        tmp.add("888");
+        tmp.add("8");
+        datas.add(tmp);
+        datas.add(tmp);
+        datas.add(tmp);
+        return new FileSystemResource(create( workbook,headers,datas));
+    }
+
+}
