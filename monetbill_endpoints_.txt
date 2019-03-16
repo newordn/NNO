@@ -1,0 +1,21 @@
+https://api.monetbil.com/payment/{version}/  : base route
+POST https://api.monetbil.com/payment/v1/placePayment : to make or place a payment 
+{ 
+"amount" : ""
+"phonenumber": "" 
+"service":"" 
+"operator":  Optional To pre-select the Express Union operator by default Value CM_EUMM 
+"currency": Optional Currency to be used (XAF) 
+"item_ref": Optional Unique reference of the article in your system. 
+"payment_ref": Optional The unique reference of the command in your system. 
+"country":  Optional Two-letter country code defined in ISO 3166-1 of the International Standard. For example, Cameroon is represented by CM. 
+"user": Optional The user who makes the purchase in your system. 
+"first_name": Optional First name of the user. 
+"last_name": Optional Last name of the user. 
+"email": Optional E-mail address of the user. To send the successful payment receipt 
+"notify_url": Optional Payment result notification 
+
+
+}
+
+
