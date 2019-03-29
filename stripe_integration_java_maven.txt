@@ -3,3 +3,38 @@
   <artifactId>stripe-java</artifactId>
   <version>8.0.2</version>
 </dependency>
+
+// Frontend
+<form th:action="@{/payment/payBy/card}" method="POST">
+                <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key=""
+                        data-amount="999"
+                        data-name=""
+                        data-description="Charging for goods"
+                        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                        data-locale="auto"
+                        data-zip-code="true"
+                >
+                </script>
+            </form>
+//Backend
+@PostMapping("/payBy/card")
+    public String payByCard(HttpServletRequest request) {
+        Stripe.apiKey = "";
+        // Token is created using Checkout or Elements!
+        // Get the payment token ID submitted by the form:
+        String token = request.getParameter("stripeToken");
+        Map<String, Object> params = new HashMap<String, Object>();
+        params.put("amount", 999);
+        params.put("currency", "usd");
+        params.put("description", "Charging for goods on Yesbanana");
+        params.put("source", token);
+        try {
+            Charge charge = Charge.create(params);
+        } catch (StripeException e) {
+            e.printStackTrace();
+        }
+
+        return "payment/transactions";
+    }
