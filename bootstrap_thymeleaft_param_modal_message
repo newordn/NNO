@@ -1,0 +1,27 @@
+<div th:fragment="messageParamModal(name,title,confirmLabel,message,href)" xmlns:th="http://www.w3.org/1999/xhtml">
+    <!-- Button trigger modal -->
+    <button type="button" th:text="${name}" class="btn btn-danger" data-toggle="modal" th:data-target="'#'+${name}">
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" th:id="${name}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" th:text="${title}"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <a th:href="@{${href}}" class="btn btn-success" th:text="${confirmLabel}"></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
