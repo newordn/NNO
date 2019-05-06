@@ -1,0 +1,7 @@
+With maven dependency its just simple as follow
+static {
+   Twilio.init(ACCOUNT_SID, AUTH_ID);
+}
+
+Message.creator(new PhoneNumber("to-number"), new PhoneNumber("from-number"),
+   "Message from Spring Boot Application").create();
