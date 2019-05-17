@@ -8,3 +8,19 @@ public static List<Long> extractIds(String stringId){
         }
         return soutesLong;
     }
+    
+    
+    //js 
+    $("#emissionModal").submit((e)=>{
+        $('input[type="checkbox"]').each(
+                function(){
+            if($(this).is(":checked"))
+    {
+        $("#soutes").val( $(this).val() + "," + $("#soutes").val());
+        console.log($("#soutes").val());
+
+    }
+
+        });
+
+    });
