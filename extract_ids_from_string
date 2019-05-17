@@ -1,0 +1,10 @@
+public static List<Long> extractIds(String stringId){
+        if(stringId.isEmpty()) return null;
+        String[] soutesString = stringId.split(",");
+        List<Long> soutesLong = new ArrayList<>() ;
+        for(int i=0;i<soutesString.length-1;i++)
+        {
+            soutesLong.add(Long.parseLong(soutesString[i]));
+        }
+        return soutesLong;
+    }
