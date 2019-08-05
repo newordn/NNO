@@ -26,3 +26,12 @@ client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
     .thenApply(HttpResponse::body)
     .thenAccept(System.out::println);
 ```
+Strings
+``` java
+" ".isBlank();                // true
+" Foo Bar ".strip();          // "Foo Bar"
+" Foo Bar ".stripTrailing();  // " Foo Bar"
+" Foo Bar ".stripLeading();   // "Foo Bar "
+"Java".repeat(3);             // "JavaJavaJava"
+"A\nB\nC".lines().count();    // 3
+```
